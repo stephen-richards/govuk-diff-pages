@@ -24,3 +24,8 @@
 
 # shots generated
 /shots
+
+# generated config files
+config/govuk_pages.yml
+config/wraith.yaml
+
