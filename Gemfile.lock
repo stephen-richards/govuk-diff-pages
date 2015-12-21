@@ -23,7 +23,6 @@ GEM
     ast (2.1.0)
     astrolabe (1.3.1)
       parser (~> 2.2)
-    byebug (6.0.0)
     casperjs (1.0.0)
     diff-lcs (1.2.5)
     domain_name (0.5.25)
@@ -81,10 +80,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
-  govuk-lint
-  rest-client
-  rspec
+  govuk-lint (~> 0.5)
+  rest-client (~> 1.8)
+  rspec (~> 3.4)
   wraith!
 
 BUNDLED WITH
