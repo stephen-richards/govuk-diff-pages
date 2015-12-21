@@ -1,0 +1,17 @@
+app_name: app_config
+app_lang: ruby
+array:
+  - one
+  - two 
+  - three
+my_hash:
+  key1: value1
+  key2: value2
+  key3:
+    nested_key1: nested_value1
+    nested_key2: nested_value2
+
+key_with_nil_value:
+
+nested:
+  key_with_nil_value:
