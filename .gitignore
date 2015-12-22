@@ -24,7 +24,7 @@
 
 # shots generated
 /shots
-
+/html_diff_screenshots
 
 # generated config files
 config/govuk_pages.yml
