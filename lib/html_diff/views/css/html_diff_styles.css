@@ -1,0 +1,59 @@
+.diff {
+  overflow: auto;
+}
+
+.diff ul {
+  background: #fff;
+  display: table;
+  font-size: 13px;
+  list-style: none;
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.diff del, .diff ins {
+  display: block;
+  text-decoration: none;
+}
+
+.diff li {
+  display: table-row;
+  height: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+.example {
+  padding: 10px;
+}
+
+.left {
+  background: #ddefff;
+}
+
+.right {
+  background: #af8ed0;
+}
+
+.diff li.ins {
+  background: #d8b6fa;
+}
+
+.diff li.del {
+  background: #ddefff;
+}
+
+.diff del, .diff ins, .diff span {
+  font-family: courier;
+  white-space: pre-wrap;
+}
+
+.diff li.diff-comment {
+  display: none;
+}
+
+.diff li.diff-block-info {
+  background: none repeat scroll 0 0 gray;
+}

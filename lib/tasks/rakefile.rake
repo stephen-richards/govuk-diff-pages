@@ -11,7 +11,8 @@ namespace :diff do
 
   desc 'produce html diffs'
   task :html do
-    puts "The feature to produce HTML diffs is not yet implemented"
+    require_relative '../html_diff/runner'
+    HtmlDiff::Runner.new.run
   end
 end
 

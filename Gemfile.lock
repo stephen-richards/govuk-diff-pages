@@ -25,6 +25,7 @@ GEM
       parser (~> 2.2)
     casperjs (1.0.0)
     diff-lcs (1.2.5)
+    diffy (3.1.0)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     govuk-lint (0.5.0)
@@ -80,6 +81,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  diffy (~> 3.1)
   govuk-lint (~> 0.5)
   rest-client (~> 1.8)
   rspec (~> 3.4)

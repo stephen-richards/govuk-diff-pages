@@ -11,6 +11,9 @@ hard_coded_pages:
 
 verbose: true
 
+html_diff:
+  directory: html_diff_screenshots
+
 page_indexer:
   # The maximum number of formats to search for.
   # There are less than 100, so a value of 100 will ensure we capture them all
