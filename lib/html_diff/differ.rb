@@ -25,11 +25,8 @@ module HtmlDiff
       production_html = get_normalized_html(production_url(base_path))
       diffy = Diffy::Diff.new(production_html, staging_html, context: 3)
       unless diffy.diff == ""
-        puts "Differences found for #{base_path}:"
         write_diff_page(base_path, diffy.to_s(:html))
         @differing_pages << base_path
-      else
-        puts "No differences found for #{base_path}"
       end
     end
 

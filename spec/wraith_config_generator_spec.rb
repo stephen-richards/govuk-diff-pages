@@ -50,6 +50,7 @@ describe WraithConfigGenerator do
     before(:each) do
       expect(YAML).to receive(:load_file).with(settings_file).and_return(standard_config)
       expect(YAML).to receive(:load_file).with(GOVUK_PAGES_FILE).and_return(govuk_pages)
+      allow(File).to receive(:exist?).with(GOVUK_PAGES_FILE).and_return(true)
     end
 
     it 'should pull in the  wraith section from the settings file' do
@@ -85,6 +86,7 @@ describe WraithConfigGenerator do
       standard_config['hard_coded_pages']['bad_url2'] = 'http://www.tfl.gov.uk/journeyplanner'
       expect(YAML).to receive(:load_file).with(settings_file).and_return(standard_config)
       expect(YAML).to receive(:load_file).with(GOVUK_PAGES_FILE).and_return(govuk_pages)
+      allow(File).to receive(:exist?).with(GOVUK_PAGES_FILE).and_return(true)
       expected_error_message = "Invalid config:\n  " +
         "ERROR: Invalid url specified in hard coded pages: 'http://www.google.com/findme'\n  " +
         "ERROR: Invalid url specified in hard coded pages: 'http://www.tfl.gov.uk/journeyplanner'"
