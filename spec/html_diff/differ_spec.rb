@@ -5,6 +5,11 @@ require 'nokogiri'
 module HtmlDiff
   describe Differ do
 
+    after(:all) do
+      test_output_dir = "#{ROOT_DIR}/html_diff_dir"
+      FileUtils.rm_r test_output_dir, secure: true if Dir.exist?(test_output_dir)
+    end
+
     let(:config) { double(AppConfig, 
       domains: double('domains', production: 'https://www.gov.uk', staging: 'https://staging.gov.uk'),
       html_diff: double('html_diff', directory: 'html_diff_dir')
