@@ -4,16 +4,19 @@ require 'nokogiri'
 
 module HtmlDiff
   describe Differ do
-
     after(:all) do
       test_output_dir = "#{ROOT_DIR}/html_diff_dir"
       FileUtils.rm_r test_output_dir, secure: true if Dir.exist?(test_output_dir)
     end
 
-    let(:config) { double(AppConfig, 
-      domains: double('domains', production: 'https://www.gov.uk', staging: 'https://staging.gov.uk'),
-      html_diff: double('html_diff', directory: 'html_diff_dir')
-    )}
+    let(:config) {
+      double(AppConfig,
+        domains: double('domains',
+          production: 'https://www.gov.uk',
+          staging: 'https://staging.gov.uk'),
+        html_diff: double('html_diff',
+          directory: 'html_diff_dir'))
+    }
     let(:differ) { Differ.new(config) }
     let(:target_base_path) { '/my_base_path' }
     let(:production_url) { "https://www.gov.uk/my_base_path" }
@@ -30,7 +33,7 @@ module HtmlDiff
         it 'returns just the body and replaces the filters' do
           expect(differ).to receive(:fetch_html).with(staging_url).and_return(staging_html)
           normalized_html = differ.send(:get_normalized_html, staging_url)
-          expect(normalized_html).to eq (staging_normalized_html)
+          expect(squish(normalized_html)).to eq staging_normalized_html
         end
       end
 
@@ -76,7 +79,7 @@ module HtmlDiff
         it 'adds the base path to the list of differing pages' do
           expect(differ).to receive(:write_diff_page).with(target_base_path, instance_of(String))
           differ.diff(target_base_path)
-          expect(differ.differing_pages).to eq([target_base_path])
+          expect(differ.differing_pages).to eq({target_base_path => "#{ROOT_DIR}/html_diff_dir/my_base_path.html"})
         end
       end
     end
@@ -104,7 +107,7 @@ module HtmlDiff
           </head>
           <body>
             <a href="https://www-origin.staging.publishing.service.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
-              <img src="https://assets-origin.staging.publishing.service.gov.uk/static/gov.uk_crown.png" width="35" height="31" alt=""> 
+              <img src="https://assets-origin.staging.publishing.service.gov.uk/static/gov.uk_crown.png" width="35" height="31" alt="">
               GOV.UK
             </a>
             <p>This is the staging body</p>
@@ -116,7 +119,7 @@ module HtmlDiff
       squish(
         '<body>
             <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
-              <img src="https:///static/gov.uk_crown.png" width="35" height="31" alt=""> 
+              <img src="https://assets.digital.cabinet-office.gov.uk/static/gov.uk_crown.png" width="35" height="31" alt="">
               GOV.UK
             </a>
             <p>This is the staging body</p>
@@ -124,7 +127,7 @@ module HtmlDiff
     end
 
     def squish(html)
-      html.gsub("\n", '').gsub(/>\s+/, '>').gsub(/\s+</, '<')
+      html.delete("\n").gsub(/>\s+/, '>').gsub(/\s+</, '<')
     end
 
     describe '#html_diff_file_name' do
@@ -140,5 +143,3 @@ module HtmlDiff
     end
   end
 end
-
-

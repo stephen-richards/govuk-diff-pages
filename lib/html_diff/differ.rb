@@ -1,23 +1,23 @@
 require 'nokogiri'
 require 'diffy'
 
-
 module HtmlDiff
   class Differ
-
     REPLACEMENTS = {
       'https://www-origin.staging.publishing.service.gov.uk' => 'https://www.gov.uk',
-      'https://assets-origin.staging.publishing.service.gov.uk' => 'https://',
+      'https://www-origin.publishing.service.gov.uk' => 'https://www.gov.uk',
+      'https://assets-origin.staging.publishing.service.gov.uk' => 'https://assets.digital.cabinet-office.gov.uk',
+      /https:\/\/assets\.digital\.cabinet-office\.gov\.uk\/specialist-frontend\/application-[0-9a-f]{32}\.js/ => 'https://assets.digital.cabinet-office.gov.uk/specialist-frontend/application-7463fa64f198b6568dc121dae41d44b1.js',
     }
 
     attr_reader :differing_pages
 
     def initialize(config)
       @config = config
-      @template = File.read "#{ROOT_DIR}/lib/html_diff/views/html_diff_template.erb"
+      @template = File.read "#{ROOT_DIR}/lib/html_diff/assets/html_diff_template.erb"
       @diff_dir = "#{ROOT_DIR}/#{@config.html_diff.directory}"
       reset_html_diffs_dir
-      @differing_pages = []
+      @differing_pages = {}
     end
 
     def diff(base_path)
@@ -26,10 +26,9 @@ module HtmlDiff
       diffy = Diffy::Diff.new(production_html, staging_html, context: 3)
       unless diffy.diff == ""
         write_diff_page(base_path, diffy.to_s(:html))
-        @differing_pages << base_path
+        @differing_pages[base_path] = html_diff_filename(base_path)
       end
     end
-
 
   private
     def reset_html_diffs_dir
@@ -41,7 +40,7 @@ module HtmlDiff
       renderer = ERB.new(@template)
       File.open(html_diff_filename(base_path), "w") do |fp|
         fp.puts renderer.result(binding)
-      end 
+      end
     end
 
     def html_diff_filename(base_path)
@@ -49,7 +48,7 @@ module HtmlDiff
     end
 
     def safe_filename(base_path)
-      remove_starting_and_trailing_slash(base_path).gsub('/', '.')
+      remove_starting_and_trailing_slash(base_path).tr('/', '.')
     end
 
     def remove_starting_and_trailing_slash(base_path)
@@ -61,7 +60,7 @@ module HtmlDiff
       REPLACEMENTS.each do |original, replacement|
         body_html.gsub!(original, replacement)
       end
-      body_html.gsub("\n", '')
+      body_html
     end
 
     def fetch_html(url)
@@ -75,21 +74,5 @@ module HtmlDiff
     def staging_url(base_path)
       "#{@config.domains.staging}#{base_path}"
     end
-
-
-
-
-
   end
 end
-
-
-
-# html = Nokogiri::HTML(`curl -s #{uri}`).css('body').to_s
-#     FILTERS.each do |pattern|
-#       html.gsub!(pattern, '')
-#     end
-#     html
-
-
-# @diff = Diffy::Diff.new(production_html, staging_html, context: 3).to_s(:html)

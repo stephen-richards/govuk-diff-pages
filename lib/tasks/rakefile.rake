@@ -1,7 +1,7 @@
 
 namespace :diff do
   desc 'produce visual diffs'
-  task :visual => ['config:pre_flight_check'] do
+  task visual: ['config:pre_flight_check'] do
     puts "---> Creating Visual Diffs"
     require_relative '../root'
     cmd = "wraith capture #{ROOT_DIR}/config/wraith.yaml"
@@ -23,9 +23,9 @@ namespace :config do
     dependencies_present = true
     %w{ imagemagick phantomjs }.each do |package|
       print "#{package}..... "
-      result = IO.popen("dpkg -l #{package} 2>&1") do |pipe|
-        pipe.readlines
-      end
+      # rubocop:disable all
+      result = IO.popen("dpkg -l #{package} 2>&1") { |p| p.readlines }
+      # rubocop:enable all
       if result.first =~ /^dpkg-query: no packages found matching/
         puts "Not found"
         dependencies_present = false
@@ -64,13 +64,15 @@ namespace :shots do
     require_relative '../root'
     require 'fileutils'
     config = AppConfig.new
-    shots_dir = "#{ROOT_DIR}/#{config.wraith.directory}"
-    FileUtils.remove_dir shots_dir
+    [config.wraith.directory, config.html_diff.directory].each do |directory|
+      shots_dir = "#{ROOT_DIR}/#{directory}"
+      FileUtils.remove_dir shots_dir
+    end
   end
 end
 
 desc 'Generate config files and run diffs'
-task diff: ['config:update_page_list', 'config:wraith', 'diff:visual']
+task diff: ['config:update_page_list', 'config:wraith', 'diff:visual', 'diff:html']
 
 desc 'checks all URLs are accessible'
 task :check_urls do

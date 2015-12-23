@@ -12,7 +12,7 @@ hard_coded_pages:
 verbose: true
 
 html_diff:
-  directory: html_diff_screenshots
+  directory: "shots/html"
 
 page_indexer:
   # The maximum number of formats to search for.
@@ -31,7 +31,7 @@ wraith:
     phantomjs: phantomjs
 
   # name of the directory where the screenshots will be stored
-  directory: shots
+  directory: "shots/visual"
 
   # Screen widths
   screen_widths:

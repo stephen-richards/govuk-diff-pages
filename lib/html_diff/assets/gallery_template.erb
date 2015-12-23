@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gallery of HTML Diffs</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../lib/html_diff/assets/html_diff_styles.css">
+  </head>
+  <body>
+    <div class="container">
+
+      <h1>List of HTML Diffs</h1>
+      <h2><%= @result_hash.size %> pages out of <%= @govuk_pages.size %> compared have differences</h2>
+
+      <div class="row">
+        <div class="col-md-12">
+        <table>
+          <% @result_hash.each do |base_path, filename| %>
+            <tr>
+              <td><%= base_path %></td>
+              <td><a href= 'file://<%= filename %>' target='_blank'>HTML Diff</a></td>
+            </tr>
+          <% end %>
+        </table>
+    </div>
+  </body>
+</html>
