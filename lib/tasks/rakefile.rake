@@ -21,12 +21,10 @@ namespace :config do
   task :pre_flight_check do
     puts "Checking required packages installed."
     dependencies_present = true
-    %w{ imagemagick phantomjs }.each do |package|
+    {imagemagick: 'convert', phantomjs: 'phantomjs'}.each do |package, binary|
       print "#{package}..... "
-      # rubocop:disable all
-      result = IO.popen("dpkg -l #{package} 2>&1") { |p| p.readlines }
-      # rubocop:enable all
-      if result.first =~ /^dpkg-query: no packages found matching/
+      result = %x[ which #{binary} ]
+      if result.empty?
         puts "Not found"
         dependencies_present = false
       else

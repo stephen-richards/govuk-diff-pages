@@ -28,6 +28,10 @@ module HtmlDiff
       File.open("#{shots_dir}/gallery.html", "w") do |fp|
         fp.puts renderer.result(binding)
       end 
+      display_browser_message(shots_dir)
+    end
+
+    def display_browser_message(shots_dir)
       puts "View the gallery of HTML diffs in your browser:"
       puts "         file://#{shots_dir}/gallery.html"
     end

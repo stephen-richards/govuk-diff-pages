@@ -21,7 +21,9 @@ module HtmlDiff
         expect(differ).to receive(:diff).with('page2')
         expect(differ).to receive(:diff).with('page3')
 
-        Runner.new.run
+        runner = Runner.new
+        expect(runner).to receive(:display_browser_message)
+        runner.run
       end
     end
   end
