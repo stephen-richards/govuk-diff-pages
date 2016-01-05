@@ -6,7 +6,6 @@ require 'json'
 require_relative 'url_checker'
 
 class PageSearcher
-  attr_reader :pages
 
   def initialize(config, formats)
     @config = config

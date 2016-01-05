@@ -1,7 +1,6 @@
 
 # base url for production and staging domains - WITHOUT TRAILING slash
 domains:
-  # production: https://www-origin.publishing.service.gov.uk
   production: https://www-origin.publishing.service.gov.uk
   staging: https://www-origin.staging.publishing.service.gov.uk
 
