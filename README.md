@@ -1,8 +1,7 @@
 
 # govuk-diff-pages
 
-This app provides a rake task to produce visual diffs as screenshots of the most popular pages on staging 
-and production environements of the gov.uk website.
+This app provides a rake task to produce visual diffs as screenshots, and HTML diffs, of the production GOVUK website as compared with staging. Both are viewable as browser pages.  It looks a the 10 most popular pages (this is configurable) of each document format.
 
 ## Screenshots
 
@@ -16,7 +15,7 @@ main gem at https://github.com/BBC-News/wraith).  The fork adds two extra config
 user to specify the number of threads to use, and the maximum timeout when loading pages.  The output is written 
 to an html file which can be viewed in a browser.
 
-When `rake diff` is run, a list of all the document formats on govuk is obtained using the search api, and then the top n pages for each format (n being a configuration variable).  Diffs are produced for each of these pages.
+When `bundle exec rake diff` is run, a list of all the document formats on govuk is obtained using the search api, and then the top n pages for each format (n being a configuration variable).  Diffs are produced for each of these pages.
 
 
 ### Dependencies
