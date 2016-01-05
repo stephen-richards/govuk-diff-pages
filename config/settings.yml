@@ -1,0 +1,53 @@
+
+# base url for production and staging domains - WITHOUT TRAILING slash
+domains:
+  production: https://www-origin.publishing.service.gov.uk
+  staging: https://www-origin.staging.publishing.service.gov.uk
+
+# Enter a list of pages that you want to diff, but are not in the list of pages returned by the 
+# page indexer
+hard_coded_pages:
+
+verbose: true
+
+html_diff:
+  directory: "shots/html"
+
+page_indexer:
+  # The maximum number of formats to search for.
+  # There are less than 100, so a value of 100 will ensure we capture them all
+  # max_formats: 100 # use this value in production
+  max_formats: 6 # use this value for a quicker test
+
+  # The maximum number of pages for each format - we will capture the <n> most popular pages
+  # max_pages_per_format: 10 # use this value in production
+  max_pages_per_format: 3 # use this value for a quicker test
+
+# Configuration options for wraith
+wraith:
+  # Headless browser option​
+  browser:
+    phantomjs: phantomjs
+
+  # name of the directory where the screenshots will be stored
+  directory: "shots/visual"
+
+  # Screen widths
+  screen_widths:
+  - 1024
+
+  # Choose how results are displayed, by default alphanumeric. Different screen widths are always grouped.
+  # alphanumeric - all paths (with, and without, a difference) are shown, sorted by path​
+  # diffs_first - all paths (with, and without, a difference) are shown, sorted by difference size (largest first)​
+  # diffs_only - only paths with a difference are shown, sorted by difference size (largest first)​
+  mode: diffs_only
+
+  # Amount of fuzz ImageMagick will use
+  fuzz: "5%"
+  threshold: 5
+
+  # number of threads to use (reduce this number if there are timeouts getting page captures)
+  num_threads: 4
+
+  # timeout in milliseconds for browser to wait for pages to load
+  timeout_ms: 2000
