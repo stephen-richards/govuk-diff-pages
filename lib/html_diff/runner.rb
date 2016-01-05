@@ -27,7 +27,7 @@ module HtmlDiff
       renderer = ERB.new(@gallery_template)
       File.open("#{shots_dir}/gallery.html", "w") do |fp|
         fp.puts renderer.result(binding)
-      end 
+      end
       display_browser_message(shots_dir)
     end
 
@@ -37,5 +37,3 @@ module HtmlDiff
     end
   end
 end
-
-

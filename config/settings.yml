@@ -34,7 +34,6 @@ wraith:
 
   # Screen widths
   screen_widths:
-  # - 768
   - 1024
 
   # Choose how results are displayed, by default alphanumeric. Different screen widths are always grouped.
