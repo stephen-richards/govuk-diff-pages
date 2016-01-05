@@ -10,8 +10,7 @@ describe PageSearcher do
       searcher = PageSearcher.new(config, %w{ speech person })
       expect(searcher).to receive(:result_set_for_format).with('speech').and_return(speeches)
       expect(searcher).to receive(:result_set_for_format).with('person').and_return(people)
-      searcher.run
-      expect(searcher.send(:pages)).to eq expected_pages
+      expect(searcher.run).to eq expected_pages
     end
 
     def expected_pages
