@@ -1,9 +1,9 @@
 # govuk-diff-pages
 
-This app provides a rake task to produce visual diffs as screenshots, and HTML
-diffs, of the production GOVUK website as compared with staging. Both are
-viewable as browser pages.  It looks a the 10 most popular pages (this is
-configurable) of each document format.
+This app provides a rake task to produce visual diffs as screenshots, HTML
+diffs and textual diffs of the production GOVUK website as compared with
+staging. Viewable as browser pages or directly in the terminal. It looks at the
+10 most popular pages (this is configurable) of each document format.
 
 ## Screenshots
 
@@ -11,7 +11,7 @@ configurable) of each document format.
 differing pages")
 
 
-## Technical documentation
+## Technical documentation for visual and HTML diffs
 
 It uses a fork of the BBC's wraith gem (The fork is at
 https://github.com/alphagov/wraith, the main gem at
@@ -32,15 +32,43 @@ these pages.
 - [phantomjs] (http://phantomjs.org/) - preferbaly 1.9 rather than 2.0
 
 
-### Running the application
+## How to run
 
-`bundle exec rake diff`
+### Running the application locally
 
+  bundle exec rake diff
+
+### Checking plain-text diffs
+
+  bundle exec rake diff:text pages.yml
+
+Where `pages.yml` is a YAML array of paths to compare. For example:
+
+  - government/organisations/prime-ministers-office-10-downing-street
+  - government/topical-events/budget-2016
+  - topic/competition/regulatory-appeals-references
+
+Text diffs can also specify the domains to compare using the `LEFT` and `RIGHT`
+environment variables. Defaulting to our `www-origin.staging` and
+`www-origin.publishing` domains respectively.
+
+Plain-text diffing can be parallelised by starting multiple processes with
+individual page files.
+
+### Using the gem from an existing project
+
+  # Gemfile
+  gem 'govuk-diff-pages'
+
+  # Rakefile
+  load 'govuk/diff/pages/tasks/rakefile.rake'
+
+  # Shell
+  bundle exec rake -T
 
 ### Running the test suite
 
-`bundle exec rake`
-
+  bundle exec rake
 
 ## Licence
 
