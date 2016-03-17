@@ -34,6 +34,7 @@ module Govuk
           end
 
         private
+
           def reset_html_diffs_dir
             Dir.mkdir(@diff_dir) unless Dir.exist?(@diff_dir)
             FileUtils.rm Dir.glob("#{@diff_dir}/*")

@@ -25,6 +25,7 @@ module Govuk
         end
 
       private
+
         def top_pages_for_format(format)
           result_set = JSON.parse(result_set_for_format(format))
           extract_top_govuk_pages(result_set)

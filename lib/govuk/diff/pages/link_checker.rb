@@ -19,6 +19,7 @@ module Govuk
         end
 
       private
+
         def print_results
           puts "Number of pages checked: #{@num_links}"
           puts "  of which:"

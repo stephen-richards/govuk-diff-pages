@@ -22,6 +22,7 @@ module Govuk
           end
 
         private
+
           def create_gallery_page
             @result_hash = @differ.differing_pages
             shots_dir = "#{Govuk::Diff::Pages.root_dir}/#{@config.html_diff.directory}"

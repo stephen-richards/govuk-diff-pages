@@ -1,5 +1,5 @@
 describe Govuk::Diff::Pages::WraithConfigGenerator do
-  let(:settings_file) { "#{Govuk::Diff::Pages.root_dir}/config/settings.yml"}
+  let(:settings_file) { "#{Govuk::Diff::Pages.root_dir}/config/settings.yml" }
   let(:standard_config) {
     {
       "domains" => {

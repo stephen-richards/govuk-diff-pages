@@ -43,6 +43,7 @@ module Govuk
         end
 
       private
+
         def populate_config(hash)
           config = OpenStruct.new
           hash.each do |key, value|

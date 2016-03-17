@@ -18,6 +18,7 @@ module Govuk
         end
 
       private
+
         def get_formats
           @formats = FormatSearcher.new(@config).run
         end
