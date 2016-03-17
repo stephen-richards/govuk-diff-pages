@@ -6,6 +6,11 @@ rm -f Gemfile.lock
 git clean -fdx
 
 bundle install --path "${HOME}/bundles/${JOB_NAME}"
+
+if [[ ${GIT_BRANCH} != "origin/master" ]]; then
+  bundle exec govuk-lint-ruby --format clang
+fi
+
 bundle exec rake
 
 if [[ -n "$PUBLISH_GEM" ]]; then
