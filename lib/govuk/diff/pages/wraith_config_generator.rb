@@ -35,6 +35,7 @@ module Govuk
         end
 
       private
+
         def validate_hard_coded_pages
           errors = []
           @config.hard_coded_pages.to_h.each do |_key, url|

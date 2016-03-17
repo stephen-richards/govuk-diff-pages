@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ben Lovell"]
   spec.email         = ["benjamin.lovell@gmail.com"]
 
-  spec.summary       = %q{Visual and textual page diffing.}
-  spec.description   = %q{Diffs web pages both visually and textually.}
+  spec.summary       = 'Visual and textual page diffing.'
+  spec.description   = 'Diffs web pages both visually and textually.'
   spec.homepage      = "https://github.com/alphagov/govuk-diff-pages"
   spec.license       = "MIT"
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

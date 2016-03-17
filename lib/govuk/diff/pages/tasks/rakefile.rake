@@ -40,7 +40,7 @@ namespace :config do
   task :pre_flight_check do
     puts "Checking required packages installed."
     dependencies_present = true
-    {imagemagick: 'convert', phantomjs: 'phantomjs'}.each do |package, binary|
+    { imagemagick: 'convert', phantomjs: 'phantomjs' }.each do |package, binary|
       print "#{package}..... "
       result = %x[ which #{binary} ]
       if result.empty?
